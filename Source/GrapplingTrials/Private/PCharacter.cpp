@@ -3,6 +3,8 @@
 
 #include "PCharacter.h"
 
+#include "PAction.h"
+#include "PActionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -16,16 +18,14 @@ APCharacter::APCharacter()
 	HeadConnectionName = FName("head");
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(FName("CameraComponent"));
 	CameraComp->SetupAttachment(GetMesh());
-
-	//Connect Camera to Character Mesh Head
-	FAttachmentTransformRules ATR = FAttachmentTransformRules(EAttachmentRule::KeepRelative, true);
-	CameraComp->AttachToComponent(GetMesh(), ATR, HeadConnectionName);
 	
 	CameraComp->bUsePawnControlRotation = true;
 	bUseControllerRotationYaw = false;
 
 	//Movement Comp
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	ActionComponent = CreateDefaultSubobject<UPActionComponent>("ActionComponent");
 }
 
 // Called when the game starts or when spawned
@@ -33,6 +33,9 @@ void APCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	//Connect Camera to Character Mesh Head
+	FAttachmentTransformRules ATR = FAttachmentTransformRules(EAttachmentRule::KeepRelative, true);
+	CameraComp->AttachToComponent(GetMesh(), ATR, HeadConnectionName);
 }
 
 void APCharacter::MoveForward(float Value)
@@ -63,6 +66,20 @@ void APCharacter::MoveRight(float Value)
 	AddMovementInput(RightVector, Value);
 }
 
+void APCharacter::PrimaryFire()
+{
+	ActionComponent->StartActionByName(this ,"TestAction");
+}
+
+void APCharacter::PrimaryAbility()
+{
+	
+}
+
+void APCharacter::SecondaryAbility()
+{
+	
+}
 
 // Called to bind functionality to input
 void APCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -74,6 +91,7 @@ void APCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("MoveRight", this, &APCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APCharacter::Jump);
+	PlayerInputComponent->BindAction("PrimaryFire", IE_Pressed, this, &APCharacter::PrimaryFire);
 
 	//Camera Input
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);

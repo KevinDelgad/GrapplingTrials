@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "PCharacter.generated.h"
 
+class UPActionComponent;
+class UPAction;
+class APGrapple;
 class UCameraComponent;
 
 UCLASS()
@@ -25,11 +28,20 @@ protected:
 
 	void MoveRight(float Value);
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
+	void PrimaryFire();
+
+	void PrimaryAbility();
+
+	void SecondaryAbility();
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly , Category = "Components")
 	UCameraComponent* CameraComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	FName HeadConnectionName;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPActionComponent* ActionComponent;
 	
 public:	
 	// Called to bind functionality to input
