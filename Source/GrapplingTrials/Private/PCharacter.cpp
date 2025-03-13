@@ -81,6 +81,16 @@ void APCharacter::SecondaryAbility()
 	
 }
 
+void APCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red,
+		FString::Printf(TEXT("Controller Rotation Vector: %s"), *GetControlRotation().ToString()));
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red,
+		
+		FString::Printf(TEXT("Controller Rotation Forward Vector: %s"), *GetControlRotation().Vector().ToString()));
+}
+
 // Called to bind functionality to input
 void APCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

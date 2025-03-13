@@ -17,12 +17,10 @@ void UPAction::StopAction_Implementation(AActor* Instigator)
 	bIsRunning = false;
 }
 
-
 bool UPAction::CanStartAction_Implementation(AActor* Instigator)
 {
 	return !bIsRunning;
 }
-
 
 bool UPAction::IsRunning()
 {

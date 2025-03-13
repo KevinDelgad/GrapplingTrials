@@ -17,9 +17,11 @@ class GRAPPLINGTRIALS_API UPAction : public UObject
 protected:
 	
 	bool bIsRunning;
+
+	UPROPERTY(EditDefaultsOnly)
+	FWorldContext Context;
 	
 public:
-
 	UFUNCTION(BlueprintNativeEvent, Category = "Action")
 	void StartAction(AActor* Instigator);
 

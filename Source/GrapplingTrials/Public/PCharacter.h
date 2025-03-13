@@ -42,9 +42,12 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPActionComponent* ActionComponent;
+
+	virtual void Tick(float DeltaSeconds) override;
 	
 public:	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 
 };

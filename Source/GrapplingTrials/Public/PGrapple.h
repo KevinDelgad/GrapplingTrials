@@ -7,6 +7,8 @@
 #include "PGrapple.generated.h"
 
 
+class UProjectileMovementComponent;
+class USphereComponent;
 class UCableComponent;
 
 UCLASS()
@@ -22,12 +24,27 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+
+	//UPROPERTY(VisibleAnywhere)
+	//USphereComponent* Hook;
+
+	//UPROPERTY(EditDefaultsOnly, Category = "Grapple")
+	//float GrappleRange;
+	
+	//UPROPERTY(VisibleAnywhere)
+	//UProjectileMovementComponent* ProjectMovementComponent;
+
+	//void Fire();
+	
+	//void AttemptGrapple();
+
+	UPROPERTY(VisibleAnywhere)
+	USphereComponent* SphereComp;
+	
+	UPROPERTY(VisibleAnywhere)
+	UProjectileMovementComponent* MovementComp;
+
 	UPROPERTY(VisibleAnywhere)
 	UCableComponent* CableComp;
-
-
-	void Fire();
-	
-	void AttemptGrapple();
-	
 };
