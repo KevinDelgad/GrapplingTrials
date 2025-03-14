@@ -42,9 +42,9 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	USphereComponent* SphereComp;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UProjectileMovementComponent* MovementComp;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UCableComponent* CableComp;
 };

@@ -13,6 +13,9 @@ APGrapple::APGrapple()
 
 	SphereComp = CreateDefaultSubobject<USphereComponent>("SphereComp");
 	//SphereComp->SetCollisionProfileName("Projectile");
+
+	//Don't collide on firing player
+	SphereComp->IgnoreActorWhenMoving(this->GetInstigator(), true);
 	RootComponent = SphereComp;
 	
 	MovementComp = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComp");

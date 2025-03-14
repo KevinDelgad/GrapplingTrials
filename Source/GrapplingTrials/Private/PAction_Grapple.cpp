@@ -56,9 +56,7 @@ void UPAction_Grapple::Grapple(APCharacter* InstigatorCharacter)
 		if (ensureAlwaysMsgf(CableComponent, TEXT("Cable Component Not Found!")))
 		{
 			CableComponent->AttachToComponent(InstigatorCharacter->GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, HandSocketName);
-			
 		}
-		
 	}
 	StopAction(InstigatorCharacter);
 	//UE_LOG(LogTemp, Warning, TEXT("Grapple"));
