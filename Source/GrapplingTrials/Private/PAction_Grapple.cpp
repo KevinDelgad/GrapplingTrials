@@ -49,16 +49,20 @@ void UPAction_Grapple::Grapple(APCharacter* InstigatorCharacter)
 		}
 		FTransform SpawnTM = FTransform(ProjRotation, HandLocation);
 		
-		AActor* NewGrapple = GetWorld()->SpawnActor<AActor>(GrappleClass, SpawnTM, SpawnParams);
+		CreatedGrapple = GetWorld()->SpawnActor<AActor>(GrappleClass, SpawnTM, SpawnParams);
 
-		UCableComponent* CableComponent = NewGrapple->FindComponentByClass<UCableComponent>();
-
-		if (ensureAlwaysMsgf(CableComponent, TEXT("Cable Component Not Found!")))
+		if (CreatedGrapple)
 		{
-			CableComponent->AttachToComponent(InstigatorCharacter->GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, HandSocketName);
+			UCableComponent* CableComponent = CreatedGrapple->FindComponentByClass<UCableComponent>();
+
+			if (ensureAlwaysMsgf(CableComponent, TEXT("Cable Component Not Found!")))
+			{
+				CableComponent->AttachToComponent(InstigatorCharacter->GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, HandSocketName);
+			}
 		}
+
 	}
-	StopAction(InstigatorCharacter);
+	//StopAction(InstigatorCharacter);
 	//UE_LOG(LogTemp, Warning, TEXT("Grapple"));
 }
 
@@ -76,4 +80,9 @@ void UPAction_Grapple::StartAction_Implementation(AActor* Instigator)
 void UPAction_Grapple::StopAction_Implementation(AActor* Instigator)
 {
 	Super::StopAction_Implementation(Instigator);
+
+	if (CreatedGrapple)
+	{
+		CreatedGrapple->Destroy();
+	}
 }

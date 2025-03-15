@@ -30,9 +30,12 @@ protected:
 
 	void PrimaryFire();
 
+	void EndGrapple();
+	
 	void PrimaryAbility();
 
 	void SecondaryAbility();
+
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly , Category = "Components")
 	UCameraComponent* CameraComp;

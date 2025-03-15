@@ -71,6 +71,11 @@ void APCharacter::PrimaryFire()
 	ActionComponent->StartActionByName(this ,"TestAction");
 }
 
+void APCharacter::EndGrapple()
+{
+	ActionComponent->StopActionByName(this ,"TestAction");
+}
+
 void APCharacter::PrimaryAbility()
 {
 	
@@ -101,8 +106,9 @@ void APCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("MoveRight", this, &APCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APCharacter::Jump);
-	PlayerInputComponent->BindAction("PrimaryFire", IE_Pressed, this, &APCharacter::PrimaryFire);
-
+	PlayerInputComponent->BindAction("FireGrapple", IE_Pressed, this, &APCharacter::PrimaryFire);
+	PlayerInputComponent->BindAction("EndGrapple", IE_Released, this, &APCharacter::EndGrapple);
+	
 	//Camera Input
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);

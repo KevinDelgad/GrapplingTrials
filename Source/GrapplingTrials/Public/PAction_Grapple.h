@@ -25,6 +25,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Effects")
 	FName HandSocketName;
 
+	UPROPERTY()
+	AActor* CreatedGrapple;
+	
+
 public:
 	
 	virtual void StartAction_Implementation(AActor* Instigator) override;
